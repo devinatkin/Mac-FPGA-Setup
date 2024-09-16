@@ -1,0 +1,34 @@
+name: Compile LaTeX for the Instructions
+
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  build_paper_pdf:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        paper:s
+          - dir: .
+            tex_file: mac_fpga_workflow_instructions
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Install LaTeX Dependencies
+      uses: ./.github/actions/install_latex_dependencies
+
+    - name: Compile Paper
+      uses: ./.github/actions/compile_latex
+      with:
+        tex-file: ${{ matrix.paper.tex_file }}
+        directory: ${{ matrix.paper.dir }}
+
+    - name: Upload Paper PDF to Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.paper.tex_file }}_pdf
+        path: ${{ matrix.paper.dir }}/*.pdf

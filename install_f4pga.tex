@@ -1,0 +1,50 @@
+F4PGA brands itself as the GCC of FPGAs. 
+While most FPGA architectures are not well publisized F4PGA has taken advantage of both the few more open companies like lattice 
+(With the best open source flow) and more closed companies like Xilinx (where they've had to reverse engineer how everything functions).
+These instructions are based partially on the getting f4pga instructions. \href{https://f4pga-examples.readthedocs.io/en/latest/getting.html}{https://f4pga-examples.readthedocs.io/en/latest/getting.html}
+\begin{minted}{bash}
+    brew install git
+    brew install wget
+    brew install xz
+\end{minted}
+
+These are required by various pieces of the toolchain so we may as well get installing them dealt with.
+
+\begin{minted}{bash}
+    export F4PGA_INSTALL_DIR=~/opt/f4pga
+    export FPGA_FAM=xc7
+\end{minted}
+
+The next step is to set the FPGA family and f4pga installation directory this should mean that you only end up installing the parts that you specifically need.
+
+\begin{minted}{bash}
+    git clone https://github.com/chipsalliance/f4pga-examples
+    cd f4pga-examples
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh -O conda_installer.sh
+\end{minted}
+
+Download the f4pga example repo. This will both give you the needed elements as well as some test examples that you can load onto the basys 3 to verify that your workflow is functional.
+You're also going to want Conda. The reasoning for the isolated environment given is that the tools are updated fairly frequently and managing them outside of virtual environments like conda becomes substantially more challenging.
+
+\begin{minted}{bash}
+    bash conda_installer.sh -u -b -p $F4PGA_INSTALL_DIR/$FPGA_FAM/conda;
+    source "$F4PGA_INSTALL_DIR/$FPGA_FAM/conda/etc/profile.d/conda.sh";
+    conda env create -f $FPGA_FAM/environment.yml    
+\end{minted}
+
+Create the virtual environment. 
+
+\begin{minted}{bash}
+    export F4PGA_PACKAGES='install-xc7'
+    mkdir -p $F4PGA_INSTALL_DIR/$FPGA_FAM
+
+    F4PGA_TIMESTAMP='20220920-124259'
+    F4PGA_HASH='007d1c1'
+    
+    for PKG in $F4PGA_PACKAGES; do
+      wget -qO- https://storage.googleapis.com/symbiflow-arch-defs/artifacts/prod/foss-fpga-tools/symbiflow-arch-defs/continuous/install/${F4PGA_TIMESTAMP}/symbiflow-arch-defs-${PKG}-${F4PGA_HASH}.tar.xz | tar -xJC $F4PGA_INSTALL_DIR/${FPGA_FAM}
+    done
+    
+\end{minted}
+
+Install the tools for required for the basys 3 board and its associated FPGA.

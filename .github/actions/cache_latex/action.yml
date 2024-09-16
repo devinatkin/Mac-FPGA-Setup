@@ -1,0 +1,17 @@
+name: Cache LaTeX Packages
+description: Caches LaTeX packages to speed up subsequent LaTeX builds
+inputs:
+  tex_files:
+    description: 'Glob pattern for the TeX files to be hashed for the cache key'
+    required: true
+    default: '**/*.tex'
+runs:
+  using: "composite"
+  steps:
+    - name: Cache LaTeX packages
+      uses: actions/cache@v4
+      with:
+        path: /usr/share/texlive
+        key: ${{ runner.os }}-texlive-${{ inputs.tex_files }}
+        restore-keys: |
+          ${{ runner.os }}-texlive-

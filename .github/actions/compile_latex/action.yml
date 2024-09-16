@@ -1,0 +1,39 @@
+name: Compile LaTeX Document
+description: Compiles a LaTeX document and checks if the PDF was successfully created.
+inputs:
+  tex-file:
+    description: 'Path to the LaTeX file to compile'
+    required: true
+    default: 'document.tex'
+  directory: 
+    description: 'Path to compile the Latex file from'
+    required: false
+    default: '.'
+
+
+runs:
+  using: "composite"
+  steps:
+    - name: Compile LaTeX Document (Initial Compilation)
+      run: |
+        cd ${{ inputs.directory }}
+        pdflatex -interaction=nonstopmode ${{ inputs.tex-file }}.tex || true
+        biber ${{ inputs.tex-file }} || true
+        pdflatex -interaction=nonstopmode ${{ inputs.tex-file }}.tex || true
+      shell: bash
+
+    - name: Compile LaTeX Document (Final Compilation)
+      run: |
+        cd ${{ inputs.directory }}
+        pdflatex -interaction=nonstopmode ${{ inputs.tex-file }}.tex || true
+      shell: bash
+
+    - name: Check if PDF was created
+      run: |
+        cd ${{ inputs.directory }}
+        pdf_file=$(basename "${{ inputs.tex-file }}").pdf
+        if [ ! -f "$pdf_file" ]; then
+          echo "PDF file was not created"
+          exit 1
+        fi
+      shell: bash
