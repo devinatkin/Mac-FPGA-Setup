@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        paper:s
+        paper:
           - dir: .
             tex_file: mac_fpga_workflow_instructions
 
