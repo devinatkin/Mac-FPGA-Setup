@@ -1,28 +1,21 @@
-name: Compile LaTeX for the Instructions
+name: Compile LaTeX Documents in Repository
 
-on:
-  push:
-    branches:
-      - main 
+on: [push]
 
 jobs:
-  build_paper_pdf:
+  build_individual_papers:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         paper:
           - dir: .
             tex_file: mac_fpga_workflow_instructions
-
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    - name: Install LaTeX Dependencies
-      uses: ./.github/actions/install_latex_dependencies
-
     - name: Compile Paper
-      uses: ./.github/actions/compile_latex
+      uses: devinatkin/latex-action/compile_latex@main
       with:
         tex-file: ${{ matrix.paper.tex_file }}
         directory: ${{ matrix.paper.dir }}
@@ -30,5 +23,5 @@ jobs:
     - name: Upload Paper PDF to Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ matrix.paper.tex_file }}_pdf
+        name: ${{ matrix.paper.tex_file }}_paper_pdf
         path: ${{ matrix.paper.dir }}/*.pdf
