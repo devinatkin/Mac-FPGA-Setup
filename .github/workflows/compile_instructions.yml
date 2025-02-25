@@ -14,6 +14,12 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
+    - name: Install Python & Pygments
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'  # Ensure Python is installed
+    - run: pip install pygments  # Install Pygments
+
     - name: Compile Paper
       uses: devinatkin/latex-action/compile_latex@main
       with:
