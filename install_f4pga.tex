@@ -9,8 +9,20 @@ Previous instructions have pointed towards using a Windows VM and running Vivado
 To this end, these instructions will take the following alternate approach.
 
 \begin{itemize}
-    \item Install Docker 
-    \item Pull or Build the needed Docker Image
-    \item Run the docker image with reference code to produce a bitstream
+    \item Install Docker. 
+    \item Pull or Build the needed Docker Image.
+    \item Run the docker image with reference code to produce a bitstream.
     \item Load that bitstream over to an attached Basys 3 FPGA board.
 \end{itemize}
+
+\subsubsection{Install Docker}
+\input{install_docker}
+
+\subsubsection{Pull the Needed Image}
+\input{pull_image}
+
+\subsubsection{Produce test bitstream}
+\input{produce_test_bitstream}
+
+\subsubsection{Load Bitstream over to attached Basys3}
+\input{load_bitstream}
