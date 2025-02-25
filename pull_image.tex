@@ -1,0 +1,16 @@
+With docker instaled you now need an image to run.
+
+To pull the image:
+\begin{minted}{bash}
+    docker pull ghcr.io/devinatkin/MAC-FPGA-SETUP:latest
+\end{minted}
+
+If you would prefer to build the image yourself, go to the repo for this document and grab the reference docker file. 
+With that saved in the local directory the following can be run to build it:
+
+\begin{minted}{bash}
+    docker build --platform=linux/amd64 -t f4pga-docker .
+\end{minted}
+
+This builds the docker container and specifies to build it as an x86 image. 
+\textit{This may seem strange given you are running on an ARM device; however, you will need to use Rosetta as not all dependencies are available on apple silicon}
