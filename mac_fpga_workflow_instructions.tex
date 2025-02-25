@@ -1,6 +1,13 @@
 \documentclass{article}
 \usepackage{hyperref}
-\usepackage{minted}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Define custom style for folder structure
+\lstdefinelanguage{tree}{
+  basicstyle=\ttfamily,
+  moredelim=**[is][\color{blue}]{@}{@}, % Highlight folders in blue
+}
 
 \title{Mac FPGA Workflow Instructions}
 \author{Devin Atkin}
@@ -22,5 +29,8 @@
 
 \section{Install F4PGA}
 \input{install_f4pga}
+
+\section{Setup your Project for F4PGA}
+\input{setup_for_f4pga.tex}
 
 \end{document}

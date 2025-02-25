@@ -1,0 +1,53 @@
+How do you setup your project to be most easily handled through F4PGA? 
+Unlike with Vivado you'll need to handle managing the folder structure yourself.
+It is a good idea to begin using git to start managing your code so that if you find yourself in a pickle you can revert back to functioning code.
+
+So long as the Makefile directs to all the correct locations most structures can work; 
+however, we're going to walk through the following structure:
+
+\begin{lstlisting}[language=tree]
+    f4pga_project/
+    ├── .git/
+    │   ├── config
+    │   ├── HEAD
+    │   ├── objects/
+    │   ├── refs/
+    ├── src/
+    │   ├── top.sv
+    │   ├── module1.sv
+    │   ├── module2.sv
+    │   ├── module3.sv
+    │   ├── ...
+    ├── constraints/
+    │   ├── constraints.xdc
+    ├── build/
+    │   ├── output.bit
+    │   ├── log.txt
+    ├── Makefile
+    ├── README.md
+    └── .gitignore
+\end{lstlisting}
+
+\begin{itemize}
+    \item .git folder, You are going to want to manage your project using git. 
+    This is a good idea regardless of toolchain; however, with f4pga it becomes especially important to ensure that directory strucutres don't get disturbed.
+    If you're using github, you'll likely have a .github folder; however, this will for the most part be managed for you. 
+
+    \item src folder, this will be where you keep all your modules not including your testbenches. 
+
+    \item constraints folder, this is where you'll store your xdc file or multiple xdc files if your project is complicated enough to justify that.
+
+    \item build folder, this should not be included in your git repository. 
+    It is what your makefile will place its output into and where you'll find your output bit file.
+
+    \item Makefile, we will go through the structure of this file in detail; however, it is what defines making the project. 
+    If you paid attention earlier you may have noticed that we specified the basys 3 when building our project. 
+    If you have multiple potential target boards, then you'll want multiple elements in your makefile showing how each board is compiled.
+
+    \item README.md, document your project. This is important both for yourself and for others who may be looking at your code down the line. 
+    This is a best practice worth getting used to!
+
+    \item .gitignore. This tells git what not to include in the github repository. 
+    In this case it'll be the build folder that you want to eliminate; however, in other cases you may eliminate things such as pyc files in python projects. 
+    
+\end{itemize}
