@@ -1,20 +1,20 @@
 You have now installed docker and pulled the required image. The next step is to run the image and produce a test bitsream to verify that everything is working correctly.
 
-\begin{minted}{bash}
+\begin{lstlisting}[language=bash]
     docker run --rm -it --platform linux/amd64 f4pga-docker /bin/bash
-\end{minted}
+\end{lstlisting}
 
 This will run the f4pga docker container and provide an interactive prompt. This can be a good way to verify that everything is correctly installed. 
 It is very important that the platform is specified, otherwise docker will attempt to run utilizing the native ARM architecture. 
 
-\begin{minted}{bash}
+\begin{lstlisting}[language=bash]
 git clone https://github.com/chipsalliance/f4pga-examples
 
 docker run --rm -it --platform linux/amd64 \
     -v /Users/devin/f4pga/f4pga-examples/xc7:/opt/f4pga-examples/xc7 \
     -w /opt/f4pga-examples/xc7 \
     f4pga-docker /bin/bash -i -c "make -C counter_test TARGET='basys3'"
-\end{minted}
+\end{lstlisting}
 
 Ideally we'll actually want to run a bitstream generation and get the results outside of the docker container. For some test code we can clone the F4PGA-Examples repository and download some code with prepared make files so that we can reach a bitstream as quickly as possible. 
 You'll notice in the docker run that a few additional elements have been added.
