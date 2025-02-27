@@ -1,11 +1,17 @@
 F4PGA brands itself as the GCC of FPGAs. 
-While most FPGA architectures are not well publisized F4PGA has taken advantage of both the few more open companies like lattice 
-(With the best open source flow) and more closed companies like Xilinx (where they've had to reverse engineer how everything functions).
-Unfortunately at time of writing F4PGA is not pre-compiled for ARM silicon.
+While most FPGA architectures are not open source, F4PGA has functional flows for both the few more open companies like Lattice 
+and more more closed companies like Xilinx.
+Project x-ray is an attempt to reverse engineer the Xilinx architectures from compiled bitstreams to create funcitonal open source toolchains.
+Unfortunately at time of writing F4PGA is not pre-compiled for ARM silicon; however, this is luckily not a deal-breaker for us.
 
-In theory this not be major hurdle; however, the instructions for F4PGA rely heavily on everything being pre-packaged, and the individual tools typically assume that you are operating on an x86 System. 
-In order to get this working you're going to need to use Rosetta for x86 emulation, and docker to containerize the needed software. 
-Previous instructions have pointed towards using a Windows VM and running Vivado within that VM; while this works, it is less than ideal due to the high overhead to run Windows within OSx. 
+In theory we could recompile everything included in F4PGA; however, 
+the instructions for F4PGA rely heavily on everything being pre-packaged, 
+and the individual tools typically assume that you are operating on an x86 System. 
+In order to get this working you are going to need to use Apple's Rosetta for x86 emulation, 
+and docker to containerize the needed software. 
+Previous instructions have pointed towards using a Windows VM and running Vivado within that VM; 
+while this works, it is less than ideal due to the high overhead to run Windows within OSx, 
+especially with the additional overhead of emulation. 
 To this end, these instructions will take the following alternate approach.
 
 \begin{itemize}
