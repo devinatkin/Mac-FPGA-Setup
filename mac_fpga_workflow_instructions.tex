@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass{report}
 \usepackage{hyperref}
 \usepackage{listings}
 \usepackage{xcolor}
@@ -9,6 +9,13 @@
   moredelim=**[is][\color{blue}]{@}{@}, % Highlight folders in blue
 }
 
+\lstset{
+    backgroundcolor=\color{gray!20}, % Light grey background
+    basicstyle=\ttfamily,            % Monospace font
+    frame=single,                     % Adds a frame around the code
+    breaklines=true                    % Enable line breaking
+}
+
 \title{Mac FPGA Workflow Instructions}
 \author{Devin Atkin}
 \date{\today}
@@ -17,9 +24,7 @@
 
 \maketitle
 
-\begin{abstract}
 \input{abstract}
-\end{abstract}
 
 \section{Install Homebrew}
 \input{homebrew_install}
