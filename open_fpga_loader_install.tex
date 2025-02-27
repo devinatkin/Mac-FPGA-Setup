@@ -5,10 +5,11 @@ brew install openfpgaloader
 \end{lstlisting}
 
 Open FPGA loader is used to take the bitstream file and load it over to a board. 
-It can be built from source and the online install guide for the tool includes special mac instructions for doing just that; however, 
+It can be built from source and the online install guide for the tool includes special Mac instructions for doing just that; however, 
 luckily it is already available as a homebrew install. 
-Run the command above and you'll have openfpgaloader ready to run. 
-This unfortunately does not accept HDL files; however, you can directly load bitstream files from the command line.
+Run the above command in your terminal and you will have openfpgaloader ready to run. 
+This unfortunately does not accept HDL files; however, 
+you can directly load bitstream files from the command line.
 
 \begin{lstlisting}[language=bash]
  openFPGALoader -b basys3 your_bitstream.bit
