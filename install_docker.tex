@@ -13,4 +13,14 @@ To install Docker Desktop on apple silicon go to the following link:
     https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64
 \end{lstlisting}
 
-Run the installer and let the Docker Daemon launch.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\linewidth]{images/Docker_Installed.jpg}
+    \caption{Docker Installation Completed}
+    \label{fig:docker_installed}
+\end{figure}
+
+
+Run the installer and let the Docker Daemon launch. 
+You should see the docker icon appear in the top bar to show that the docker daemon is running, you can see this in figure \ref{fig:docker_installed}. 
+Docker containers are essentially trimmed down VMs, in our case we will use Rosetta to run a small Ubuntu VM for a brief moment while we compile our HDL to a bitstream.

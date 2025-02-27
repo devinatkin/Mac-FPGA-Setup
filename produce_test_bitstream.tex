@@ -1,30 +1,45 @@
-You have now installed docker and pulled the required image. The next step is to run the image and produce a test bitsream to verify that everything is working correctly.
+You have now installed docker and pulled the required image. 
+The next step is to run the image and produce a test bitstream to verify that everything is working correctly.
 
 \begin{lstlisting}[language=bash]
     docker run --rm -it --platform linux/amd64 f4pga-docker /bin/bash
 \end{lstlisting}
 
-This will run the f4pga docker container and provide an interactive prompt. This can be a good way to verify that everything is correctly installed. 
-It is very important that the platform is specified, otherwise docker will attempt to run utilizing the native ARM architecture. 
+This will run the f4pga docker container and provide an interactive prompt. 
+This can be a good way to verify that everything is correctly installed. 
+\textit{It is very important that the platform is specified, otherwise docker will attempt to run utilizing the native ARM architecture}. 
+Once you are done interacting with the docker container run exit to stop and remove the container.
 
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}[language=bash, columns=fullflexible]
 git clone https://github.com/chipsalliance/f4pga-examples
 
 docker run --rm -it --platform linux/amd64 \
-    -v /Users/devin/f4pga/f4pga-examples/xc7:/opt/f4pga-examples/xc7 \
+    -v /Users/your_username/f4pga/f4pga-examples/xc7:/opt/f4pga-examples/xc7 \
     -w /opt/f4pga-examples/xc7 \
     f4pga-docker /bin/bash -i -c "make -C counter_test TARGET='basys3'"
 \end{lstlisting}
 
-Ideally we'll actually want to run a bitstream generation and get the results outside of the docker container. For some test code we can clone the F4PGA-Examples repository and download some code with prepared make files so that we can reach a bitstream as quickly as possible. 
-You'll notice in the docker run that a few additional elements have been added.
+Ideally we'll actually want to run a bitstream generation and get the results outside of the docker container. 
+For some test code we can clone the F4PGA-Examples repository and use the provided example code so that we can reach a bitstream as quickly as possible. 
+Run the above commands in your terminal, ensuring to appropriately substitute out your own directories. 
 
+You'll notice in the docker run that a few additional elements have been added to the commands.
 \begin{itemize}
-    \item --rm option, this removes the container once execution stops. This means that you don't need to manually remove it before executing again.
-    \item --it option, this pretties up the output and directs the output to the main terminal. It will run wihtout this; however, you won't know the current state or if anything has gone wrong. 
+    \item --rm option, this removes the container once execution stops. 
+    This means that you don't need to manually remove it before executing again.
+
+    \item --it option, this pretties up the output and directs the output to the main terminal. 
+    It will run wihtout this; however, you won't know the current state or if anything has gone wrong. 
+
     \item -v option, this is the volume mount. I'm pointing this towards the directory of the f4pga example code targetting the Artix 7 series. 
-    You'll want to adjust the directory to match your own directory here. This also means that once the bitstream is geenrated you'll see it appear in your native file system without needing to transfer the data back and forth. 
+    You'll want to adjust the directory to match your own directory here. 
+    This also means that once the bitstream is generated you'll see it appear in your native file system without needing to transfer the data manually. 
+
     \item -w option, this option you may or may not need depending on your directory structure. It is setting the working directory within the docker container. 
+
     \item f4pga-docker, this is the container name. Yours may be called MAC-FPGA-SETUP or something else depending on how you pulled the image.
-    \item /bin/bash -i -c "make -C counter_test TARGET='basys3'", This is what actually executes the bitstream synthesis and implementation. We will go over the makefile struture later in this document.
+    
+    \item \texttt{/bin/bash -i -c "make -C counter\_test TARGET='basys3'"}, 
+    This is what actually executes the bitstream synthesis and implementation. We will go over the Makefile structure later in this document.
+
 \end{itemize}
