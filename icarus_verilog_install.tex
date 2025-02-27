@@ -1,0 +1,33 @@
+
+
+\begin{lstlisting}[language=bash]
+    brew install icarus-verilog
+\end{lstlisting}
+
+You may be able to generate bitstreams and load them onto boards; however, that's only half the FPGA design battle.
+You also need to be able to simulate your designs. 
+Luckily this is a piece of software which can be installed with homebrew; 
+install Icarus Verilog with the command above. 
+
+
+This will install iverilog to compile simulations which can then be run using vvp which was installed alongside iverlog.
+We will go over the use of this momentarily; however, there is a final piece of the puzzle, viewing the waveforms.
+You're going to want to export a vcd file from your testbenches.  
+
+\begin{lstlisting}[language=verilog]
+    initial begin
+        $dumpfile("testbench.vcd");
+        $dumpvars(0, testbench);
+    end
+\end{lstlisting}
+
+Add these lines to your testbench. 
+When the vvp simulator runs, it will generate a VCD file that you can view with a waveform viewer.
+
+
+\begin{lstlisting}[language=bash]
+    brew install surfer
+\end{lstlisting}
+
+The best option currently available is surfer which after running the above install can be launched from the command line with the surfer command. 
+This will bring up the gui and allow you to import the vcd file and inspect the waveforms.
