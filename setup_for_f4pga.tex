@@ -25,12 +25,15 @@ however, we're going to walk through the following structure:
     ├── build/
     │   ├── output.bit
     │   ├── log.txt
+    ├── common/
+    │   ├── common.mk
     ├── Makefile
     ├── README.md
     └── .gitignore
     \end{lstlisting}
     \caption{F4PGA Project Directory Structure}
 \end{figure}
+
 
 
 \begin{itemize}
@@ -45,6 +48,13 @@ however, we're going to walk through the following structure:
     \item build folder, this should not be included in your git repository. 
     It is what your makefile will place its output into and where you'll find your output bit file.
 
+    \item common folder, this can be included in your git repository.
+    It contains the additional make instructions that will be combined with your makefile to complete the bitstream generation. 
+    You may notice we didn't include this in the mount for docker. 
+    This is technically true; however, 
+    the container already contains a copy of the f4pga common makefile internally which ends up being referenced by the specified mount. 
+    It is for the best to simply include it yourself to avoid any hassles regarding directory structure. 
+
     \item Makefile, we will go through the structure of this file in detail; however, it is what defines making the project. 
     If you paid attention earlier you may have noticed that we specified the basys 3 when building our project. 
     If you have multiple potential target boards, then you'll want multiple elements in your makefile showing how each board is compiled.
@@ -56,3 +66,6 @@ however, we're going to walk through the following structure:
     In this case it'll be the build folder that you want to eliminate; however, in other cases you may eliminate things such as pyc files in python projects. 
     
 \end{itemize}
+
+\subsubsection{F4PGA Makefiles}
+\input{f4pga_makefiles}

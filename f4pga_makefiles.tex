@@ -1,0 +1,21 @@
+F4PGA has a good guide on creating custom makefiles for your projects, for a more extensive explanation go to: https://f4pga-examples.readthedocs.io/en/latest/customizing-makefiles.html.
+
+\begin{lstlisting}[language=make]
+    current_dir := ${CURDIR}
+
+    TARGET := basys3
+
+    TOP := <put the name of your top module here>
+
+    SOURCES := ${current_dir}/src/*.sv
+
+    XDC := ${current_dir}/constraints/constraints.xdc
+
+    include ${current_dir}/common/common.mk
+\end{lstlisting}
+
+
+I've filled in this example with reasonable guesses for what each of your values should be in the makefile assuming you have identical folder structure to what is shown.
+The idea is that this file specifies all the details of the design. 
+common.mk is provided both in the repo for this document and in f4pga-examples repo. 
+It contains all the requried instructions to the toolchain to export a bitstream file. 
