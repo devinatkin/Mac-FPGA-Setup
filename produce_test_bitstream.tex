@@ -29,16 +29,16 @@ You'll notice in the docker run that a few additional elements have been added t
     This means that you don't need to manually remove it before executing again.
 
     \item --it option, this pretties up the output and directs the output to the main terminal. 
-    It will run wihtout this; however, you won't know the current state or if anything has gone wrong. 
+    It will run without this; however, you won't know the current state or if anything has gone wrong. 
 
-    \item -v option, this is the volume mount. I'm pointing this towards the directory of the f4pga example code targetting the Artix 7 series. 
+    \item -v option, this is the volume mount. I'm pointing this towards the directory of the f4pga example code targeting the Artix 7 series. 
     You'll want to adjust the directory to match your own directory here. 
     This also means that once the bitstream is generated you'll see it appear in your native file system without needing to transfer the data manually. 
 
     \item -w option, this option you may or may not need depending on your directory structure. It is setting the working directory within the docker container. 
 
     \item f4pga-docker, this is the container name. Yours may be called MAC-FPGA-SETUP or something else depending on how you pulled the image.
-    
+
     \item \texttt{/bin/bash -i -c "make -C counter\_test TARGET='basys3'"}, 
     This is what actually executes the bitstream synthesis and implementation. We will go over the Makefile structure later in this document.
 

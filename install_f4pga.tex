@@ -1,7 +1,7 @@
 F4PGA brands itself as the GCC of FPGAs. 
 While most FPGA architectures are not open source, F4PGA has functional flows for both the more open companies like Lattice 
 and more more closed companies like Xilinx.
-Project x-ray is an attempt to reverse engineer the Xilinx architectures from compiled bitstreams to create funcitonal open source toolchains.
+Project x-ray is an attempt to reverse engineer the Xilinx architectures from compiled bitstreams to create functional open source toolchains.
 Unfortunately at time of writing F4PGA is not pre-compiled for any ARM based cpu platforms; 
 however, this is luckily not a deal-breaker for us.
 
@@ -12,7 +12,7 @@ and the individual tools typically assume that you are operating on an x86 Syste
 So instead to get this working you are going to need to use Apple's Rosetta for x86 emulation, 
 and docker to containerize the needed software. 
 Previous instructions have pointed towards using a Windows VM and running Vivado within that VM; 
-while this works, it is less than ideal due to the high overhead to run Windows within OSx, 
+while this works, it is less than ideal due to the high overhead to run Windows within macOS, 
 especially with the additional overhead of emulation. 
 To this end, these instructions will take the following alternate approach.
 
