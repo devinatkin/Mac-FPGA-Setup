@@ -29,16 +29,27 @@ jobs:
       - name: Install Pandoc
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc
+          sudo apt-get install -y pandoc rsync
 
       - name: Convert .tex to index.html
         run: |
             mkdir -p dist
             base="${{ matrix.paper.tex_file }}"
+            # Point Pandoc at places where images live
             pandoc "${{ matrix.paper.dir }}/${base}.tex" -s \
             --mathjax="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" \
-            -o "dist/index.html"
+            --resource-path=".:${{ matrix.paper.dir }}" \
+            -o dist/index.html
 
+      - name: Copy images for GitHub Pages
+        run: |
+            # Copy common web image types, keep directory structure
+            rsync -a --prune-empty-dirs \
+            --include '*/' \
+            --include '*.png' --include '*.jpg' --include '*.jpeg' \
+            --include '*.gif' --include '*.svg' \
+            --exclude '*' \
+            "${{ matrix.paper.dir }}/" dist/
 
       - name: Disable Jekyll
         run: touch dist/.nojekyll
